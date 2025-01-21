@@ -13,6 +13,8 @@ Route::prefix('/admin')->group(function () {
         Route::prefix('category')->group(function () {
             Route::get('/logout', [logincontroller::class, 'logout'])->name('logout');
             Route::get('/index', [logincontroller::class, 'index'])->name('index');
+            Route::get('/create', [logincontroller::class, 'create'])->name('create');
+            Route::post('/store', [logincontroller::class,'store'])->name('postStore');
         });
     });
     Route::middleware('authuser')->group(function () {

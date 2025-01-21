@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -14,7 +15,29 @@ class logincontroller extends Controller
     {
         return view('register');
     }
-
+     
+    public function create(){
+        $category = category::get();
+        return view('form',compact('category'));
+    }
+    public function store(Request $request){
+        $validator = Validator::make($request->all(),[
+            'sellist2'  => 'required',
+            'name' =>'required',
+            'image' =>'required',
+        ]);
+        if ($validator->passes()) {
+            
+            return response()->json([
+                'status' => true,
+                'message' => 'fdbdghfggfnghngh'
+            ]);
+        }
+        return response()->json([
+            'status' => false,
+            'errors' => $validator->errors()
+        ]);
+    }
     public function index()
     {
         return view('index');
